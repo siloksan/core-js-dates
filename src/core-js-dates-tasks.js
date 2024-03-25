@@ -47,17 +47,19 @@ function getTime(date) {
  * '03 Dec 1995 00:12:00 UTC' => 'Sunday'
  * '2024-01-30T00:00:00.000Z' => 'Tuesday'
  */
+
+const week = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 function getDayName(date) {
   const result = new Date(date);
-  const week = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
   return week[result.getDay()];
 }
 
@@ -73,8 +75,17 @@ function getDayName(date) {
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
 function getNextFriday(date) {
-  // const result = 
+  const originalDate = new Date(date);
+  let day = originalDate.getDay();
+  if (day < 5) {
+    day = 5 - day;
+  } else {
+    day = 12 - day;
+  }
+  originalDate.setDate(day + originalDate.getDate());
+  return originalDate;
 }
+getNextFriday(new Date('2024-02-03T00:00:00Z'));
 
 /**
  * Returns the number of days in a specified month and year.
