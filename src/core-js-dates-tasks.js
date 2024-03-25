@@ -85,7 +85,6 @@ function getNextFriday(date) {
   originalDate.setDate(day + originalDate.getDate());
   return originalDate;
 }
-getNextFriday(new Date('2024-02-03T00:00:00Z'));
 
 /**
  * Returns the number of days in a specified month and year.
@@ -98,8 +97,10 @@ getNextFriday(new Date('2024-02-03T00:00:00Z'));
  * 1, 2024 => 31
  * 2, 2024 => 29
  */
-function getCountDaysInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountDaysInMonth(month, year) {
+  const result = new Date(year, month);
+  result.setDate(0);
+  return result.getDate();
 }
 
 /**
