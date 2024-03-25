@@ -161,7 +161,7 @@ function formatDate(date) {
   const result = new Date(date);
   const delta = result.getTimezoneOffset();
   const newTime = new Date(result.getTime() + delta * 60 * 1000);
-  return newTime.toLocaleString();
+  return newTime.toLocaleString('en-us');
 }
 
 /**
@@ -176,8 +176,18 @@ function formatDate(date) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  const weekends = [0, 6];
+  let weekendCount = 0;
+  const daysInMonth = getCountDaysInMonth(month, year);
+
+  for (let i = 1; i <= daysInMonth; i += 1) {
+    const day = new Date(year, month - 1, i).getDay();
+    if (weekends.includes(day)) {
+      weekendCount += 1;
+    }
+  }
+  return weekendCount;
 }
 
 /**
